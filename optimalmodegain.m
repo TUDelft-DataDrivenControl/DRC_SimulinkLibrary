@@ -1,7 +1,7 @@
-function K = optimalModeGainK(rho, R, tsr, Cp, G)
+function K = optimalmodegain(rho, R, tsr, Cp, G)
 % Calculates optimal mode gain K for use in a K-omega-squared controller
 % 
-% K = optimalModeGainK(rho, R, tsr, Cp, G), with
+% K = optimalmodegain(rho, R, tsr, Cp, G), with
 % rho = Air density [kg/m^3]
 % R = rotor radius [m]
 % tsr = tip-speed ratio for provided power coefficient C_p [-]

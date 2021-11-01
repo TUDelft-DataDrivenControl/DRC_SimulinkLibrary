@@ -12,6 +12,11 @@ function P = loadTurbineConstants(turbineName)
 % Delft Center for Systems and Control (DCSC)
 % The Netherlands, 2021
 
+rpm2rads = pi/30;
+rads2rpm = 30/pi;
+deg2rad = pi/180;
+rad2deg = 180/pi;
+
 if strcmpi(turbineName, 'NREL5MW')
     P.H = 90;                               % Tower height [m]
     P.R = 63;                               % Rotor length [m]
@@ -24,7 +29,12 @@ if strcmpi(turbineName, 'NREL5MW')
     P.Jlss = 3*P.Jb + P.Jh + P.Jg*P.G^2;    % Second mass moment of inertia of rotor, at LSS [kg m^2]
     P.Jhss = P.Jlss/P.G^2;                  % Second mass moment of inertia of rotor, casted to HSS [kg m^2]
     P.Prated = 5e6;                         % Rated power [W]
-    P.etag = 0.944;                       % Generator efficiency [-]
+    P.etag = 0.944;                         % Generator efficiency [-]
+    P.wgen_min = 0*rpm2rads;                % Minimum generator speed [rad/s]
+    P.wgen_max = 1600*rpm2rads;             % Maximum generator speed [rad/s]
+    P.wrot_min = P.wgen_min/P.G;            % Minimum generator speed [rad/s]
+    P.wrot_max = P.wgen_max/P.G;            % Maximum generator speed [rad/s]
+    P.pitchFine = 0*deg2rad;                % Fine pitch angle [rad]
 else
     error('Invalid turbine name')
 end
