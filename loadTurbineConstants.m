@@ -32,8 +32,10 @@ if strcmpi(turbineName, 'NREL5MW')
     P.etag = 0.944;                         % Generator efficiency [-]
     P.wgen_min = 0*rpm2rads;                % Minimum generator speed [rad/s]
     P.wgen_max = 1600*rpm2rads;             % Maximum generator speed [rad/s]
+    P.wgen_rated = 1173.7*rpm2rads;         % Rated generator speed [rad/s]
     P.wrot_min = P.wgen_min/P.G;            % Minimum generator speed [rad/s]
     P.wrot_max = P.wgen_max/P.G;            % Maximum generator speed [rad/s]
+    P.wrot_rated = P.wgen_rated/P.G;        % Maximum generator speed [rad/s]
     P.pitchFine = 0*deg2rad;                % Fine pitch angle [rad]
 else
     error('Invalid turbine name')
