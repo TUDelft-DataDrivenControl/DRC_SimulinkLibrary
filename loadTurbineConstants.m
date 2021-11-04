@@ -1,8 +1,8 @@
-function P = loadTurbineConstants(turbineName)
-% loadTurbineConstants - Returns a structure with constants for a
+function P = loadturbineconstants(turbineName)
+% loadturbineconstants - Returns a structure with constants for a
 % reference wind turbine model.
 %
-% P = loadWindTurbineConstants(TURBINENAME) - P is the structure containing
+% P = loadturbineconstants(TURBINENAME) - P is the structure containing
 % all wind turbine constant parameteters and TURBINENAME is a string
 % specifying the reference wind turbine model. Currently the following
 % turbines are supported:
