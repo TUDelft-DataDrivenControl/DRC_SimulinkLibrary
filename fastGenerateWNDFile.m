@@ -1,4 +1,4 @@
-function fastgeneratewndfile(time, windSpeed)
+function fastgeneratewndfile(time, windSpeed, varargin)
 % Generates an OpenFAST compatible .wnd file according by providing a 
 % 1-dimensional time and value (wind speed) array.
 %
@@ -7,11 +7,21 @@ function fastgeneratewndfile(time, windSpeed)
 % one-dimensional WINDSPEED vector. No vertical speed, horizontal/vertical
 % or wind directions are set (=0).
 %
+% fastgeneratewndfile(TIME, WINDSPEED, PATH) - Provide a (relative) PATH to
+% specify where the file should be written. The PATH should also include
+% the filename
+%
 % S.P. Mulders (Sebastiaan)
 % Delft Center for Systems and Control (DCSC)
 % The Netherlands, 2021
 
-    fid = fopen([pwd, '\wind.wnd'], 'wt');
+    if isempty(varargin)
+        loc = ['.', filesep, 'wind.wnd'];
+    else
+        loc = varargin{1};
+    end
+    
+    fid = fopen(loc, 'wt');
     fprintf(fid, '!Wind file for trivial turbine. \n');
     fprintf(fid, '!Time  Wind     Wind		Vert.       Horiz.      Vert.       LinV        Gust \n');
     fprintf(fid, '!      Speed    Dir    Speed       Shear				Shear       Shear       Speed \n');
@@ -20,4 +30,3 @@ function fastgeneratewndfile(time, windSpeed)
     end
     fclose(fid);
 end
-
