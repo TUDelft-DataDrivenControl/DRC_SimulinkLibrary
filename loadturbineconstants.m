@@ -13,9 +13,6 @@ function P = loadturbineconstants(turbineName)
 % The Netherlands, 2021
 
 rpm2rads = pi/30;
-rads2rpm = 30/pi;
-deg2rad = pi/180;
-rad2deg = 180/pi;
 
 if strcmpi(turbineName, 'NREL5MW')
     P.H = 90;                               % Tower height [m]
@@ -35,7 +32,7 @@ if strcmpi(turbineName, 'NREL5MW')
     P.wr_min = P.wg_min/P.G;                % Minimum generator speed [rad/s]
     P.wr_max = P.wg_max/P.G;                % Maximum generator speed [rad/s]
     P.wr_rated = P.wg_rated/P.G;            % Maximum generator speed [rad/s]
-    P.beta_fine = 0*deg2rad;                % Fine pitch angle [rad]
+    P.beta_fine = deg2rad(0);                % Fine pitch angle [rad]
     P.Tg_rated = 43093.55;                  % Minimum generator torque (mechanical) [Nm]
     P.Tg_min = -100;                        % Minimum generator torque (mechanical)[Nm]
     P.Tg_max = P.Tg_rated*2;                % Minimum generator torque (mechanical) [Nm]

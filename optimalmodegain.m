@@ -15,5 +15,10 @@ if nargin == 4
 end
 
 K = pi*rho*R^5*Cp/(2*tsr^3*G^3);
+
+
+%% Add an expression for VAWT
+% K = rho*A*R^3*Cp/(2*tsr^3*G^3);
+
 end
 

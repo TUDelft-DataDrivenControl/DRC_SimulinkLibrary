@@ -6,7 +6,7 @@ function replaceinfile(INFILE, OUTFILE, SEARCHSTRING, REPLACESTRING, varargin)
 % written to OUTFILE, which can either be the same as INFILE or defined as
 % a new file.
 % 
-% replaceinfile(INFILE, OUTFILE, SEARCHSTRING, REPLACESTRING, DELIM, SEARCHLOC, REPLACELOC)
+% replaceinfile(INFILE, OUTFILE, SEARCHSTRING, REPLACESTRING, DELIM, SEARCHLOC, REPLACELOC, EXACTMATCH)
 % When providing a delimiter DELIM, you can specifify at which delimiter location 
 % a match with SEARCHSTRING should be found. When a match is found,
 % REPLACESTRING is written to delimiter location REPLACELOC.
@@ -18,10 +18,11 @@ function replaceinfile(INFILE, OUTFILE, SEARCHSTRING, REPLACESTRING, varargin)
 
 % Assertions
 if ~isempty(varargin)
-    if length(varargin) == 3
+    if length(varargin) == 4
         DELIM = char(varargin{1});
         SEARCHLOC = varargin{2};
         REPLACELOC = varargin{3};
+        EXACTMATCH = varargin{4};
     else
         error('When providing a delimiter, also searchLocation and replaceLocation should be provided');
     end
@@ -36,6 +37,12 @@ end
 if ~isa(REPLACELOC, 'numeric')
     error('replaceLocation should be an integer');
 end
+
+% If no OUTFILE is specified, overwrite INFILE
+if isempty(OUTFILE)
+    OUTFILE = INFILE;
+end
+
 
 % Some preprocessing
 SEARCHSTRING = char(SEARCHSTRING);
@@ -55,7 +62,12 @@ for ii = 1:length(data{1})
         if length(data_split) < SEARCHLOC || length(data_split) < REPLACELOC
             continue
         end
-        stringFound = strcmp(data_split{SEARCHLOC}, SEARCHSTRING);
+        
+        if EXACTMATCH
+            stringFound = strcmp(data_split{SEARCHLOC}, SEARCHSTRING);
+        else
+            stringFound = contains(data_split{SEARCHLOC}, SEARCHSTRING);
+        end
         
         if ~stringFound
             continue
