@@ -15,4 +15,7 @@ assignin('base','rpm2rads',rpm2rads);
 rads2rpm = 30/pi; % Conversion factor [rpm/(rad/s)]
 assignin('base','rads2rpm',rads2rpm);
 
+currentDT = datestr(now(), 'yyyymmddHHMM');
+assignin('base','currentDT',currentDT);
+
 end
