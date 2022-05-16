@@ -25,7 +25,11 @@ if strcmpi(turbineName, 'NREL5MW')
     P.Jg = 534.116;                         % Second mass moment of inertia of the generator, at HSS [kg m^2]
     P.Jlss = 3*P.Jb + P.Jh + P.Jg*P.G^2;    % Second mass moment of inertia of rotor, at LSS [kg m^2]
     P.Jhss = P.Jlss/P.G^2;                  % Second mass moment of inertia of rotor, casted to HSS [kg m^2]
+    
+    P.k_dt = 8.67637e08;                    % Drivetrain torsional spring constant, at LSS (N-m/rad)
+    P.c_dt = 6.215e06;                      % Drivetrain torsional damper coefficient, at LSS (N-m/(rad/s))
     P.etag = 0.944;                         % Generator efficiency [-]
+    
     P.wg_min = 0*rpm2rads;                  % Minimum generator speed [rad/s]
     P.wg_max = 1600*rpm2rads;               % Maximum generator speed [rad/s]
     P.wg_rated = 1173.7*rpm2rads;           % Rated generator speed [rad/s]
